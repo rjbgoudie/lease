@@ -1,0 +1,28 @@
+Package: lease
+Title: Temporary connections to databases
+Version: 0.0.0.9000
+Authors@R:
+    person("R.J.B", "Goudie", , "rjbgoudie@gmail.com", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0001-9554-1499"))
+Description: Enables the creation of temporary connections ("leases") to
+    databases, particularly aimed at single-user databases like duckdb
+License: MIT + file LICENSE
+Depends:
+    methods,
+    R (>= 3.6.0)
+Imports:
+    DBI (>= 1.2.1),
+    later (>= 1.0.0),
+    R6,
+    rlang (>= 1.0.0)
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.3
+Suggests:
+    dbplyr,
+    duckdb,
+    knitr,
+    rmarkdown,
+    testthat (>= 3.0.0)
+VignetteBuilder: knitr
+Config/testthat/edition: 3

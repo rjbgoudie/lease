@@ -1,0 +1,50 @@
+---
+title: "Introduction to lease"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to lease}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+The `lease` package provides a way to manage temporary connections to databases, specifically designed for single-user databases like DuckDB where file locks can be an issue.
+
+## Basic Usage
+
+A `lease` object acts as a proxy for a `DBI` connection. It automatically opens the connection when needed, keeps it open for a specified timeout, and retries with exponential back-off if the database is locked.
+
+```{r setup}
+library(lease)
+library(DBI)
+```
+
+### Creating a Lease
+
+You can create a lease using `dbLease()`. You provide a DBI driver and any arguments needed for `dbConnect()`.
+
+```{r example}
+# Create a lease for an in-memory DuckDB database
+# (Using a file-based one would be more typical for lease)
+db_lease <- dbLease(
+  duckdb::duckdb(dbdir = ":memory:"), 
+  timeout = 60,
+  max_retries = 10
+)
+```
+
+### Using the Lease
+
+The `lease` package wraps many standard `DBI` methods. This means you can use the `db_lease` object directly where you would normally use a `conn`.
+
+```{r dbi-methods}
+# Write data
+dbWriteTable(db_lease, "mtcars", mtcars)
+
+# Query data
+res <- dbGetQuery(db_lease, "SELECT * FROM mtcars LIMIT 5")
+head(res)
+
+# List tables
+dbListTables(db_lease)
+```
+
