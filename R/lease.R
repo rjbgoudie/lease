@@ -17,6 +17,9 @@ Lease <- R6Class(
     #' @field max_retries Numeric. Number of times to retry connecting using exponential back-off.
     max_retries = NULL,
 
+    #' @field verbose Logical. If `TRUE`, reports connections and disconnections via `cli`.
+    verbose = NULL,
+
     #' @field cache An environment holding the persistent connection state and timestamps.
     cache = NULL,
 
@@ -28,18 +31,18 @@ Lease <- R6Class(
     #' @param drv A [DBI Driver][DBI::DBIDriver-class], e.g., `duckdb::duckdb()`.
     #' @param ... Additional arguments passed to [DBI::dbConnect()].
     #' @param timeout Seconds to hold the connection open for reuse. Default is `60`.
-    #' @param max_retries Number of times to retry connecting using exponential back-off. Default is `3`.
+    #' @param max_retries Number of times to retry connecting using exponential back-off. Default is `10`.
+    #' @param verbose Logical. If `TRUE`, prints messages when connecting and disconnecting. Default is `FALSE`.
     #' @param cache An optional environment to use for caching. If `NULL`, a new environment is created.
     #' @return A new `Lease` object.
     initialize = function(drv = character(), ...,
-                          timeout = 60, max_retries = 10, cache = NULL) {
+                          timeout = 60, max_retries = 10, verbose = FALSE, cache = NULL) {
       self$drv <- drv
       self$timeout <- timeout
       self$max_retries <- max_retries
+      self$verbose <- verbose
       self$dots <- list(...)
 
-      # Environments are reference objects. They must be initialized inside
-      # the constructor so instances don't share the same cache environment.
       self$cache <- cache %||% new.env(parent = emptyenv())
     }
   )

@@ -11,6 +11,7 @@ Depends:
     methods,
     R (>= 3.6.0)
 Imports:
+    cli,
     DBI (>= 1.2.1),
     later (>= 1.0.0),
     R6,
