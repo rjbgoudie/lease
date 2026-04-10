@@ -9,7 +9,7 @@
 \alias{dbListTables,Lease-method}
 \alias{dbListObjects,Lease-method}
 \alias{dbReadTable,Lease,ANY-method}
-\alias{dbWriteTable,Lease,ANY,ANY-method}
+\alias{dbWriteTable,Lease,ANY-method}
 \alias{dbCreateTable,Lease-method}
 \alias{dbAppendTable,Lease-method}
 \alias{dbExistsTable,Lease,ANY-method}
@@ -46,7 +46,7 @@
 
 \S4method{dbReadTable}{Lease,ANY}(conn, name, ...)
 
-\S4method{dbWriteTable}{Lease,ANY,ANY}(conn, name, value, ...)
+\S4method{dbWriteTable}{Lease,ANY}(conn, name, value, ...)
 
 \S4method{dbCreateTable}{Lease}(conn, name, fields, ..., row.names = NULL, temporary = FALSE)
 

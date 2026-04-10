@@ -4,7 +4,7 @@
 \alias{dbLease}
 \title{Create a lease to a database connection}
 \usage{
-dbLease(drv, ..., timeout = 60, max_retries = 10)
+dbLease(drv, ..., timeout = 60, max_retries = 10, verbose = FALSE)
 }
 \arguments{
 \item{drv}{A \link[DBI:DBIDriver-class]{DBI Driver}, e.g. \code{duckdb::duckdb()}}
@@ -14,6 +14,8 @@ dbLease(drv, ..., timeout = 60, max_retries = 10)
 \item{timeout}{Seconds to hold the connection open for reuse.}
 
 \item{max_retries}{Number of times to retry connecting using exponential back-off.}
+
+\item{verbose}{Logical. If \code{TRUE}, prints messages when connecting and disconnecting.}
 }
 \value{
 An object of class lease

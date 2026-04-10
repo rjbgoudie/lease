@@ -12,11 +12,11 @@ lease using exponential back-off for connection attempts.
 \describe{
 \item{\code{drv}}{A \link[DBI:DBIDriver-class]{DBI Driver} used to connect to the database.}
 
-\item{\code{read_only}}{Logical. Indicates whether the database connection should be read-only.}
-
 \item{\code{timeout}}{Numeric. Seconds to hold the connection open for reuse.}
 
 \item{\code{max_retries}}{Numeric. Number of times to retry connecting using exponential back-off.}
+
+\item{\code{verbose}}{Logical. If \code{TRUE}, reports connections and disconnections via \code{cli}.}
 
 \item{\code{cache}}{An environment holding the persistent connection state and timestamps.}
 
@@ -40,9 +40,9 @@ Create a new Lease object.
 \if{html}{\out{<div class="r">}}\preformatted{Lease$new(
   drv = character(),
   ...,
-  read_only = FALSE,
-  timeout = 30,
-  max_retries = 3,
+  timeout = 60,
+  max_retries = 10,
+  verbose = FALSE,
   cache = NULL
 )}\if{html}{\out{</div>}}
 }
@@ -54,11 +54,11 @@ Create a new Lease object.
 
 \item{\code{...}}{Additional arguments passed to \code{\link[DBI:dbConnect]{DBI::dbConnect()}}.}
 
-\item{\code{read_only}}{Logical. Should the connection be read-only? Default is \code{FALSE}.}
+\item{\code{timeout}}{Seconds to hold the connection open for reuse. Default is \code{60}.}
 
-\item{\code{timeout}}{Seconds to hold the connection open for reuse. Default is \code{30}.}
+\item{\code{max_retries}}{Number of times to retry connecting using exponential back-off. Default is \code{10}.}
 
-\item{\code{max_retries}}{Number of times to retry connecting using exponential back-off. Default is \code{3}.}
+\item{\code{verbose}}{Logical. If \code{TRUE}, prints messages when connecting and disconnecting. Default is \code{FALSE}.}
 
 \item{\code{cache}}{An optional environment to use for caching. If \code{NULL}, a new environment is created.}
 }
