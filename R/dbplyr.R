@@ -1,5 +1,5 @@
 tbl.Lease <- function(src, from, ..., vars = NULL) {
-  dbplyr::tbl_sql("Lease", dbplyr::src_dbi(src), from, ..., vars = vars)
+  dbplyr::tbl_sql(c("lease", "dbi"), dbplyr::src_dbi(src), from, ..., vars = vars)
 }
 
 dbplyr_register_methods <- function() {
