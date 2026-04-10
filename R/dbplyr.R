@@ -4,7 +4,10 @@ tbl.Lease <- function(src, from, ..., vars = NULL) {
 
 dbplyr_register_methods <- function() {
   s3_register("dplyr::tbl", "Lease")
-  s3_register("dplyr::copy_to", "Lease")
+
+  # Still need to implement
+  # s3_register("dplyr::copy_to", "Lease")
+
   s3_register("dbplyr::dbplyr_edition", "Lease", function(con) 2L)
 
   # Wrappers inspect formals so can only be executed if dbplyr is available
